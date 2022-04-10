@@ -20,17 +20,20 @@ class App extends Component {
                         <nav>
                             <ul>
                                 <li>
-                                    <Link to='/'>Home</Link>
+                                    <Link tto='/about/abc'>Home</Link>
                                 </li>
                                 <li>
-                                    <Link to='/about/'>About</Link>
+                                    <Link to='/about/def'>About</Link>
                                 </li>
                             </ul>
                         </nav>
 
                         <Routes>
                             <Route path='/' element={<Index />} />
-                            <Route path='/about/' element={<About />} />
+                            <Route
+                                path='/about/:minhaVariavel(abc|def)'
+                                element={<About />}
+                            />
                         </Routes>
                     </div>
                 </Router>
