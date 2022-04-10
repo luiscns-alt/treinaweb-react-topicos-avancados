@@ -8,10 +8,10 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import Index from './views/index';
 import About from './views/about';
 import Address from './views/about/address';
 
+const Index = React.lazy(() => import('./views/index'));
 const TextCounter = React.lazy(() => import('./components/TextCounter'));
 
 class App extends Component {
@@ -32,11 +32,6 @@ class App extends Component {
                                 `Tem certeza que deseja ir para ${location.pathname}?`
                             }
                         />
-
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <TextCounter />
-                        </Suspense>
-
                         <nav>
                             <ul>
                                 <li>
@@ -47,11 +42,17 @@ class App extends Component {
                                 </li>
                             </ul>
                         </nav>
-                        <Switch>
-                            <Route path='/' exact component={Index} />
-                            <Route path='/about' component={About} />
-                            <Route path='/:abc' component={Address} />
-                        </Switch>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Switch>
+                                <Route
+                                    path='/'
+                                    exact
+                                    component={() => <Index />}
+                                />
+                                <Route path='/about' component={About} />
+                                <Route path='/:abc' component={Address} />
+                            </Switch>
+                        </Suspense>
                     </div>
                 </Router>
             </div>
