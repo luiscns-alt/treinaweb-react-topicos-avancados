@@ -1,24 +1,21 @@
-// @flow
-
 import React, { Component } from 'react';
 import './App.css';
 
-type Props = {
-    name?: string,
-    age: number,
-    isActive: boolean,
-    nameList: Array<string>,
-};
+import enLocaleData from 'react-intl/locale-data/en';
+import jaLocaleData from 'react-intl/locale-data/ja';
+import ptLocaleData from 'react-intl/locale-data/pt';
+import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl';
 
-type State = {
-    counter: number,
-};
+import messages from './i18n/messages';
+import ClickCounter from './components/ClickCounter';
 
-class App extends Component<Props, State> {
-    constructor(props: Props) {
+addLocaleData([...enLocaleData, ...jaLocaleData, ...ptLocaleData]);
+
+class App extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            counter: 0,
+            currentLang: 'pt',
         };
     }
 
@@ -26,7 +23,24 @@ class App extends Component<Props, State> {
         const { state } = this;
         return (
             <div>
-                <h1>Hello!</h1>
+                <IntlProvider
+                    locale={state.currentLang}
+                    messages={messages[state.currentLang]}
+                >
+                    <div>
+                        <FormattedMessage
+                            id='app.hi'
+                            description='saudacao'
+                            defaultMessage='Hi'
+                        />
+                        <br />
+                        <FormattedMessage
+                            id='app.bye'
+                            description='despedida'
+                            defaultMessage='Bye'
+                        />
+                    </div>
+                </IntlProvider>
             </div>
         );
     }
