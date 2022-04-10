@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { ProductService } from '../services/ProductService';
 
@@ -39,10 +40,18 @@ class NewProductView extends Component {
         const { state } = this;
         return (
             <div>
-                <h1>Novo Produto</h1>
+                <h1>
+                    <FormattedMessage
+                        defaultMessage='New Product'
+                        id='product.new.title'
+                    />
+                </h1>
                 <form className='product-form' onSubmit={this.handleSubmit}>
                     <label>
-                        <span>Imagem</span>
+                        <FormattedMessage
+                            defaultMessage='Image'
+                            id='product.new.image'
+                        />
                         <input
                             name='image'
                             onChange={this.handleChange}
@@ -51,7 +60,10 @@ class NewProductView extends Component {
                         />
                     </label>
                     <label>
-                        <span>Descrição</span>
+                        <FormattedMessage
+                            defaultMessage='Description'
+                            id='product.new.description'
+                        />
                         <input
                             name='description'
                             onChange={this.handleChange}
@@ -60,7 +72,10 @@ class NewProductView extends Component {
                         />
                     </label>
                     <label>
-                        <span>Preço</span>
+                        <FormattedMessage
+                            defaultMessage='Price'
+                            id='product.new.price'
+                        />
                         <input
                             name='price'
                             onChange={this.handleChange}
@@ -68,7 +83,12 @@ class NewProductView extends Component {
                             value={state.price}
                         />
                     </label>
-                    <button type='submit'>Criar Produto</button>
+                    <button type='submit'>
+                        <FormattedMessage
+                            defaultMessage='Create Product'
+                            id='product.new.create'
+                        />
+                    </button>
                 </form>
             </div>
         );
