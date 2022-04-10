@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
 
-import Transition from 'react-transition-group/Transition';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 class App extends Component {
     constructor(props) {
@@ -20,36 +19,27 @@ class App extends Component {
                 isOn: !isOn,
             };
         });
-        // entering
-        // entered
-        // exiting
-        // exited
     }
 
     render() {
         const { state } = this;
         return (
             <div>
-                <Transition
+                <CSSTransition
                     in={state.isOn}
-                    mountOnEnter={true}
-                    appear={true}
                     timeout={{
                         enter: 300,
                         exit: 500,
                     }}
-                >
-                    {(status) => {
-                        return (
-                            <button
-                                onClick={this.handleClick}
-                                className={'btn ' + status}
-                            >
-                                CLICK
-                            </button>
-                        );
+                    classNames={{
+                        enter: 'entrando',
+                        exitDone: 'saindo',
                     }}
-                </Transition>
+                >
+                    <button onClick={this.handleClick} className={'btn'}>
+                        CLICK
+                    </button>
+                </CSSTransition>
             </div>
         );
     }
